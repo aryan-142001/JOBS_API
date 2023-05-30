@@ -1,0 +1,233 @@
+openapi: 3.0.0
+info:
+  title: JOBS_API
+  description: Jobs_API
+  contact:
+    name: Aryan
+    email: aryan142001@gmail.com
+  version: '1.0'
+servers:
+- url: http://localhost:5000/api/v1
+  variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+      - auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginUserRequest'
+              - example:
+                  email: aryan14022001@gmail.com
+                  password: secret1
+            example:
+              email: aryan14022001@gmail.com
+              password: secret1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+      - auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterUserRequest'
+              - example:
+                  name: aryan
+                  email: aryan14022001@gmail.com
+                  password: secret1
+            example:
+              name: aryan
+              email: aryan14022001@gmail.com
+              password: secret1
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    get:
+      tags:
+      - job
+      summary: Get all jobs
+      operationId: Getalljobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - job
+      summary: Create a job
+      operationId: Createajob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateajobRequest'
+              - example:
+                  company: samsung(ssir)
+                  position: Memory Solutions
+                  status: interview
+            example:
+              company: samsung(ssir)
+              position: Memory Solutions
+              status: interview
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+      - job
+      summary: Get a job
+      operationId: Getajob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - job
+      summary: Update a job
+      operationId: Updateajob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateajobRequest'
+              - example:
+                  company: googleCracked
+            example:
+              company: googleCracked
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - job
+      summary: Delete a job
+      operationId: Deleteajob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: aryan14022001@gmail.com
+        password: secret1
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: aryan
+        email: aryan14022001@gmail.com
+        password: secret1
+    CreateajobRequest:
+      title: CreateajobRequest
+      required:
+      - company
+      - position
+      - status
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+        status:
+          type: string
+      example:
+        company: samsung(ssir)
+        position: Memory Solutions
+        status: interview
+    UpdateajobRequest:
+      title: UpdateajobRequest
+      required:
+      - company
+      type: object
+      properties:
+        company:
+          type: string
+      example:
+        company: googleCracked
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: auth
+  description: ''
+- name: job
+  description: ''
